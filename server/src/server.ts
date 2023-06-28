@@ -1,22 +1,50 @@
-import { config } from "dotenv";
-config();
-
+import dotenv from "dotenv";
 import express from "express";
-import mongoose from "mongoose";
+import path from "path";
+import * as routes from "./routes";
 
-
-import Deck from "./models/Deck"
-
+dotenv.config();
+const port = process.env.SERVER_PORT;
 const app = express();
-const Port = 5000;
 
-app.get('/', (req, res) => {
-    res.send("Hello World")
+app.use(express.json());
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
+
+app.listen(port, () => {
+    console.log(`Server goes on http://localhost:${port}`);
 })
 
-const db =  mongoose.connect(process.env.MONGO_URL ?? "")
-    .then(() => {
-    console.log(`Listening on port ${Port}`);
-    app.listen(Port)
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { config } from "dotenv";
+// config();
+// const db =  mongoose.connect(process.env.MONGO_URL ?? "")
+//     .then(() => {
+//     console.log(`Listening on port ${Port}`);
+//     app.listen(Port)
+// })
 
