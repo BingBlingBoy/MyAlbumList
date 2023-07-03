@@ -1,7 +1,7 @@
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID; 
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 
-export async function AccessToken() {
+export async function getAccessToken() {
     const authParameters = {
         method: 'POST',
         headers: {
@@ -9,10 +9,20 @@ export async function AccessToken() {
         },
         body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
     }
+    
+    try {
+        const response = await fetch("https://accounts.spotify.com/api/token", authParameters)
+        
+        if (!response.ok) {
+            throw new Error("Couldn't fetch data")
+        }
 
-    const response = await fetch("https://accounts.spotify.com/api/token", authParameters)
-    const data = await response.json()
-    return data.access_token
+        const data = await response.json()
+        return data.access_token
+    } catch (err) {
+        console.log(err) 
+    }
+
 
     // fetch("https://accounts.spotify.com/api/token", authParameters)
     //      .then(result => result.json())

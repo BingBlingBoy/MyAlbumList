@@ -7,15 +7,28 @@ export const getAllArtistAlbums = async (accessToken, searchInput) => {
             'Authorization':'Bearer ' + accessToken
         }
     }
-
-    const artistIdResponse = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
-    const artistIdData = await artistIdResponse.json() 
-    const artistID = artistIdData.artists.items[0].id
-    console.log("Artist ID is " + artistID );
     
-    const returnedAlbumsResponse = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
-    const returnedAlbumData = await returnedAlbumsResponse.json()
-    return returnedAlbumData.items
+    try {
+        const artistIdResponse = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', searchParameters)
+        const artistIdData = await artistIdResponse.json() 
+        const artistID = artistIdData.artists.items[0].id
+        console.log("Artist ID is " + artistID );
+
+        if (!artistIdResponse.ok) {
+            throw new Error("Couldn't fetch artist ID")
+        }
+
+        const returnedAlbumsResponse = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit=50', searchParameters)
+        const returnedAlbumData = await returnedAlbumsResponse.json()
+        
+        if (!artistIdResponse.ok) {
+            throw new Error("Couldn't fetch artist's albums")
+        }
+
+        return returnedAlbumData.items
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 
