@@ -1,31 +1,47 @@
 import { useState } from "react"
-import { getAllArtistAlbums } from "../services/ArtistServices";
+import { getSearchQueryData } from "../services/SearchQuery"
+import Dropdown from "./Dropdown"
 
-const SearchArtistAlbums = ({accessToken}) => {
+const SearchBar = (props) => {
 
     const [searchInput, setSearchInput] = useState("");
-    const [albums, setAlbums] = useState([])
-    
-    const settingArtistsAlbums = async () => {
-        const artistAlbumsResponse = await getAllArtistAlbums(accessToken, searchInput)
-        console.log(artistAlbumsResponse)
-        setAlbums(artistAlbumsResponse)
+    const [response, setResponse] = useState([] as any[])
+    const [searchField, setSearchField] = useState("artist");
+
+    // const settingArtistsAlbums = () => {
+    //     getAllArtistAlbums(accessToken, searchInput).then(data => setAlbums(data))
+    // }
+
+    const settingSearchQuery = () => {
+        getSearchQueryData(props.accessToken, searchInput, searchField).then(data => setResponse(data))
+    } 
+
+    const handleSearchFieldChange = (event) => {
+        setSearchField(event.target.value);
     }
 
     const content = (
         <> 
-            <form>
-                <input type="input" onChange={event => setSearchInput(event.target.value)}></input>         
-                <button type="button" onClick={() => settingArtistsAlbums()}>search</button>
-            </form>
+            <input 
+            type="input" 
+            placeholder="Search..."
+            onKeyUp = {(event) => {
+                if (event.key === "Enter") {
+                    settingSearchQuery()
+                }
+            }}
+            onChange={event => setSearchInput(event.target.value)}
+            />
 
-            {albums.map( (album, i) => {
-
+            <button type="button" onClick={() => settingSearchQuery()}>search</button>
+            <Dropdown searchField={searchField} onSearchFieldChange={handleSearchFieldChange}/>
+            {response.map( (data, i) => {
+                console.log(data)
                 return (
                     <div className="card" key={i}>
                         <div className="card-body" key={i}>
-                            <h1>{album.name}</h1>
-                            <img src={album.images[2].url} alt="logo_image" />
+                            <h1>{data.name}</h1>
+                            {data.images.length !== 0 ? <img src={data.images[2].url} alt="image of search field" /> : <h2>No image</h2> }
                         </div>
                     </div>
                  )
@@ -35,7 +51,7 @@ const SearchArtistAlbums = ({accessToken}) => {
     return content
 }
 
-export default SearchArtistAlbums
+export default SearchBar
 
 
 
