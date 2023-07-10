@@ -1,9 +1,18 @@
-const Dropdown = ({ searchField, onSearchFieldChange}) => {
+import {
+    Select
+} from "./styles/Dropdown.style"
+
+interface props {
+    searchField: string
+    handleSearchFieldChange: React.ChangeEventHandler<HTMLSelectElement> | undefined 
+}
+
+const Dropdown = ({ searchField , handleSearchFieldChange }: props) => {
     const content = (
-        <select value={searchField} onChange={onSearchFieldChange}>
+        <Select value={searchField} onChange={handleSearchFieldChange}>
             <option value="artist">Artist</option>
             <option value="album">Album</option>
-        </select>
+        </Select>
     )
 
     return content

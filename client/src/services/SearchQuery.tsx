@@ -17,11 +17,14 @@ export const getSearchQueryData = async (state: stateProps) => {
     }
     try {
         const response = await fetch('https://api.spotify.com/v1/search?q=' + searchInput + `&type=${searchField}`, searchParameters)
-        const data = await response.json() 
+        if (!response.ok) {
+            throw new Error("Couldn't fetch data")
+        }
+        const data = await response.json()
         console.log(data)
         return data[field].items
-
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error)
+        return Promise.reject(error)
     }
 }

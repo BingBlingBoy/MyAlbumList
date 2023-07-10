@@ -1,8 +1,13 @@
 import { 
     NavbarContainer,
     NavbarLinkContainer,
-    NavbarLink
+    NavbarInnerContainer,
+    NavbarLink,
+    NavbarLeftContainer,
+    NavbarRightContainer,
+    NavbarMiddleContainer
 } from "./styles/Navbar.style"
+
 import SearchBar from "./Searchbar"
 import { getAccessToken } from "../services/UseAccessToken";
 import { useEffect, useState } from "react";
@@ -19,13 +24,17 @@ const NavBar = () => {
     return (
         <>
             <NavbarContainer>
-                <NavbarLinkContainer>
+                <NavbarLeftContainer>
                     <NavbarLink to="/">myAlbumList</NavbarLink>
+                </NavbarLeftContainer>
+                <NavbarMiddleContainer>
                     <SearchBar accessToken={accessToken}/>  
+                </NavbarMiddleContainer>
+                <NavbarRightContainer>
                     <NavbarLink to="/new-music">New Music</NavbarLink>
                     <NavbarLink to="/playlists">Playlist</NavbarLink>
                     <NavbarLink to="/sign-in">Sign In</NavbarLink>
-                </NavbarLinkContainer>
+                </NavbarRightContainer>
             </NavbarContainer>
         </>
     )
