@@ -42,8 +42,7 @@ const Search = () => {
             {error 
                 ? <h1>An error occurred while searching</h1> 
                 
-                : 
-                response.length === 0 ? <h1>There is no searches</h1> :
+                : //make sure to add the if array is empty thing 
 
                 response.map( (data, i) => {
                     return (

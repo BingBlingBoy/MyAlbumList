@@ -1,4 +1,10 @@
+import Login from "./Login"
+
 const SignIn = () => {
-    return <h1>Standup sheet</h1>
+    
+    const content = (
+        <Login />
+    )
+    return content
 }
 export default SignIn

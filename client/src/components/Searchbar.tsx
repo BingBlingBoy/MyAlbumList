@@ -20,7 +20,10 @@ const SearchBar = ({accessToken}: accessTokenProps) => {
     const aToken = accessToken
     
     const navigate = useNavigate();
-    const handleSearch = () => {
+    
+    const handleSearch = (event) => {
+        console.log(aToken)
+        event.preventDefault();
         if (searchInput) {
             navigate("/search", { state: {searchInput, searchField, aToken} });
         }
@@ -33,8 +36,8 @@ const SearchBar = ({accessToken}: accessTokenProps) => {
     const content = (
         <>
             <SearchbarContainer>
-                    <Form>
-                        <Dropdown searchField={searchField} handleSearchFieldChange={handleSearchFieldChange}/>
+                    <Form onSubmit={handleSearch}>
+                        <Dropdown searchField={searchField} onhandleSearchFieldChange={handleSearchFieldChange}/>
                         <Input 
                         type="input" 
                         placeholder="Search..."

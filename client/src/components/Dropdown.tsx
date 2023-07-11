@@ -4,12 +4,12 @@ import {
 
 interface props {
     searchField: string
-    handleSearchFieldChange: React.ChangeEventHandler<HTMLSelectElement> | undefined 
+    onhandleSearchFieldChange: any 
 }
 
-const Dropdown = ({ searchField , handleSearchFieldChange }: props) => {
+const Dropdown = ({ searchField , onhandleSearchFieldChange }: props) => {
     const content = (
-        <Select value={searchField} onChange={handleSearchFieldChange}>
+        <Select value={searchField} onChange={onhandleSearchFieldChange}>
             <option value="artist">Artist</option>
             <option value="album">Album</option>
         </Select>

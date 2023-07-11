@@ -6,6 +6,7 @@ type stateProps = {
 
 export const getSearchQueryData = async (state: stateProps) => {
     const {searchInput, searchField, aToken} = state;
+    console.log(aToken)
     const field = searchField + "s";
     
     const searchParameters = {

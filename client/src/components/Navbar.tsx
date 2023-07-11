@@ -18,8 +18,8 @@ const NavBar = () => {
     
     useEffect(() => {
         getAccessToken().then(data => setAccessToken(data))
-    }, []);
 
+    }, []);
 
     return (
         <>
