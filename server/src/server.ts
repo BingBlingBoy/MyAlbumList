@@ -1,30 +1,33 @@
 import dotenv from "dotenv";
 import express from "express";
-import path from "path";
 import routes from "./routes/Token";
 import cors from "cors"
+import userRoutes from "./routes/userRoutes"
+import {notFound, errorHandler} from "./middleware/errorMiddleware"
+import connectDB from "./config/db";
+import cookieParser from "cookie-parser";
 
+connectDB();
 const port = 3000;
 dotenv.config();
 const app = express();
 
 app.use(cors());
-// var corsMiddleware = function(req: any, res: any, next: any) {
-//     res.header('Access-Control-Allow-Origin', 'localhost'); //replace localhost with actual host
-//     res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
-// 
-//     next();
-// }
 
+
+// Middleware to parse JSON bodies
 app.use(express.json());
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
 
-app.use(express.static(path.join(__dirname, "public")));
+// Middleware to parse URL-encoded bodies
+app.use(express.urlencoded({ extended: true }));
 
+app.use(cookieParser());
 
 app.use('/', routes)
+app.use('/api/users', userRoutes)
+
+app.use(notFound)
+app.use(errorHandler)
 
 app.listen(port, () => {
     console.log(`Server goes on http://localhost:${port}`);

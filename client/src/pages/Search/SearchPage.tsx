@@ -40,9 +40,9 @@ const Search = () => {
             <h1>THIS IS THE SEARCHBAR</h1>
             <br></br>
             {error 
-                ? <h1>An error occurred while searching</h1> 
+                ? <h1>Couldn't fetch the data.</h1> 
                 
-                : //make sure to add the if array is empty thing 
+                : 
 
                 response.map( (data, i) => {
                     return (
