@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { SyntheticEvent, useState } from "react"
 import Dropdown from "./Dropdown"
 import { useNavigate } from "react-router-dom"
 import {
@@ -21,7 +21,7 @@ const SearchBar = ({accessToken}: accessTokenProps) => {
     
     const navigate = useNavigate();
     
-    const handleSearch = (event) => {
+    const handleSearch = (event: SyntheticEvent) => {
         console.log(aToken)
         event.preventDefault();
         if (searchInput) {

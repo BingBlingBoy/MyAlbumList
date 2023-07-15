@@ -11,11 +11,13 @@ import {
 import SearchBar from "./Searchbar"
 import { getAccessToken } from "../services/UseAccessToken";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 
 const NavBar = () => {
     
     const [accessToken, setAccessToken] = useState("");
-    
+    const { userInfo } = useSelector((state) => state.auth)
+
     useEffect(() => {
         getAccessToken().then(data => setAccessToken(data))
 
@@ -33,7 +35,17 @@ const NavBar = () => {
                 <NavbarRightContainer>
                     <NavbarLink to="/new-music">New Music</NavbarLink>
                     <NavbarLink to="/playlists">Playlist</NavbarLink>
-                    <NavbarLink to="/sign-in">Sign In</NavbarLink>
+                    
+                    {userInfo ? (
+                        <>
+                        <NavbarLink to="/profile">Profile</NavbarLink>
+                        </>
+                    ) 
+                    :(
+                        <>
+                        <NavbarLink to="/sign-in"> Sign In </NavbarLink>
+                        </>
+                    )}
                 </NavbarRightContainer>
             </NavbarContainer>
         </>

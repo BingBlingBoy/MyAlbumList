@@ -6,9 +6,9 @@ import generateUserToken from "../utils/generateUserToken";
 
 const authUser = asyncHandler(async (req: Request, res: Response) => {
     const { email, password } = req.body;
-
+    
     const user = await User.findOne({ email });
-
+    
     if (user && (await user.matchPassword(password))) {
         generateUserToken(res, user._id);
 

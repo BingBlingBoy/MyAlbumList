@@ -1,10 +1,14 @@
 import Login from "./Login"
+import SignIn from "./SignIn"
 
-const SignIn = () => {
+const SignInPage = () => {
     
     const content = (
-        <Login />
+        <>
+            <Login />
+            <SignIn />
+        </>
     )
     return content
 }
-export default SignIn
+export default SignInPage
