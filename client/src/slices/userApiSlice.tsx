@@ -3,17 +3,17 @@ const USERS_URL = '/api/users'
 
 // Define the type for usersApiSlice
 
-export const userApiSlice: any = apiSlice.injectEndpoints({
-    endpoints: (builder: any) => ({
+export const userApiSlice = apiSlice.injectEndpoints({
+    endpoints: (builder) => ({
         login: builder.mutation({
-            query: (data: any) => ({
+            query: (data) => ({
                 url: `${USERS_URL}/auth`,
                 method: 'POST',
                 body: data
             }) 
         }),
         register: builder.mutation({
-            query: (data: any) => ({
+            query: (data) => ({
                 url: `${USERS_URL}/`,
                 method: 'POST',
                 body: data
@@ -26,7 +26,7 @@ export const userApiSlice: any = apiSlice.injectEndpoints({
             })
         }),
         updateUser: builder.mutation({
-            query: (data: any) => ({
+            query: (data) => ({
                 url: `${USERS_URL}/profile`,
                 method: 'PUT',
                 body: data

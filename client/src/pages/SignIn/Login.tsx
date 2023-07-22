@@ -6,6 +6,7 @@ import { useLoginMutation } from "../../slices/userApiSlice"
 import { useDispatch, useSelector} from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { Form, Button } from 'react-bootstrap'
 
 const LoginBox = () => {
     
@@ -25,7 +26,7 @@ const LoginBox = () => {
         }
     }, [navigate, userInfo])
 
-    const submitHandler = async (event) => {
+    const submitHandler = async (event: SyntheticEvent) => {
         event.preventDefault();
         try {
             const res = await login({ email, password }).unwrap();
@@ -38,27 +39,27 @@ const LoginBox = () => {
 
     const content = (
         <>
-        <form onSubmit={ submitHandler }>
-            <h1>Sign in PLEEEEEEEEEEEEEASEEEEEEEEE</h1>
-            <input 
-            type="text" 
-            placeholder="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            />
+        <h1>Login</h1>
+        <Form className="border"> 
+            <Form.Group className="mb-3 mt-5 px-5" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={(event) => setEmail(event.target.value)}/>
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
+            </Form.Group>
 
-            <br></br>
+            <Form.Group className="mb-3 px-5" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
+            </Form.Group>
+            <div className="mb-2 text-center">
+                <Button onClick={ submitHandler } variant="primary" type="submit">
+                    Submit
+                </Button>
+            </div>
+        </Form>
 
-            <input 
-            type="text" 
-            placeholder="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            />
-
-            <br></br>
-            <button type="submit">Login</button>
-        </form>
         {isLoading && <h2>Loading innit</h2> } {/*Add spinner */}
         <ToastContainer 
             position="bottom-right"

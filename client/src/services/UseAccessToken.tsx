@@ -1,6 +1,6 @@
 export async function getAccessToken() {
     try {
-        const response = await fetch("http://localhost:3000/token")
+        const response = await fetch("http://localhost:3000/api/spotify/")
 
         if (!response.ok) {
             throw new Error("Couldn't fetch data")

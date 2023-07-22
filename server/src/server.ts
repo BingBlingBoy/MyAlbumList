@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes"
 import {notFound, errorHandler} from "./middleware/errorMiddleware"
 import connectDB from "./config/db";
 import cookieParser from "cookie-parser";
+import spotifyRoutes from "./routes/spotifyRoutes"
 
 connectDB();
 const port = 3000;
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 
-app.use('/', routes)
+app.use('/api/spotify', spotifyRoutes)
 app.use('/api/users', userRoutes)
 
 app.use(notFound)
