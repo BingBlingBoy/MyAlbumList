@@ -37,7 +37,9 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        likedAlbums: {},
+        likedArtists: {}
     });
 
     if (user) {
@@ -70,6 +72,7 @@ const getUserProfile = asyncHandler(async (req: any, res: Response) => {
         _id: req.user._id,
         name: req.user.name,
         email: req.user.email,
+        likedAlbums: req.user.likedAlbums,
     }
 
     res.status(200).json(user);
@@ -80,7 +83,7 @@ const updateUserProfile = asyncHandler(async (req: any, res: Response) => {
 
     if (user) {
         user.name = req.body.name || user.name;
-        user.name = req.body.email || user.email;
+        user.email = req.body.email || user.email;
 
         if (req.body.password) {
             user.password = req.body.password;
@@ -102,10 +105,183 @@ const updateUserProfile = asyncHandler(async (req: any, res: Response) => {
     res.status(200).json({message: 'Update user profile'});
 });
 
+const getUserLikedAlbums = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        res.status(200).json({
+            likedAlbums: user.likedAlbums,
+        });
+        
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+
+})
+
+const addUserLikedAlbums = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        const albumId = req.body.albumId
+        const title = req.body.title
+        const img = req.body.img
+        
+        const newAlbum = {
+            title,
+            img
+        }
+        
+        user.likedAlbums = {
+            ...user.likedAlbums,
+            [albumId]: newAlbum,
+        }
+
+        const updatedUser = await user.save();
+        console.log("saved object: ",updatedUser.likedAlbums)
+
+        res.status(200).json({
+            _id: updatedUser._id,
+            likedAlbums: updatedUser.likedAlbums,
+        });
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+    
+})
+
+const removeUserLikedAlbums = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        const albumId = req.body.albumId
+
+        if (albumId in user.likedAlbums) {
+            delete user.likedAlbums[albumId]
+            user.markModified('likedAlbums')
+            
+            try {
+                const updatedUser = await user.save();
+                res.status(200).json({
+                    message: 'Removed Album from Liked Albums',
+                    _id: updatedUser._id,
+                    likedAlbums: updatedUser.likedAlbums,
+                });
+
+                console.log("After change:", user.likedAlbums)
+            } catch (err) {
+                res.status(404);
+                throw new Error("Couldn't save error")
+            }
+
+        } else {
+            res.status(404);
+            throw new Error('Album not found')
+        }
+
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+    
+})
+
+const getUserLikedArtists = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        res.status(200).json({
+            likedArtists: user.likedArtists,
+        });
+        
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+
+})
+
+const addUserLikedArtists = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        const artistId = req.body.artistId
+        const name = req.body.name
+        const img = req.body.img
+        
+        const newArtist = {
+            name,
+            img
+        }
+        
+        user.likedArtists = {
+            ...user.likedArtists,
+            [artistId]: newArtist,
+        }
+
+        const updatedUser = await user.save();
+        console.log("saved object: ",updatedUser.likedArtists)
+
+        res.status(200).json({
+            _id: updatedUser._id,
+            likedArtists: updatedUser.likedArtists,
+        });
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+    
+})
+
+const removeUserLikedArtists = asyncHandler(async (req: any, res: Response) => {
+    const user = await User.findById(req.user._id)
+    
+    if (user) {
+        const artistId = req.body.artistId
+
+        if (artistId in user.likedArtists) {
+            delete user.likedArtists[artistId]
+            user.markModified('likedArtists')
+            
+            try {
+                const updatedUser = await user.save();
+                res.status(200).json({
+                    message: 'Removed Artist from Liked Artists',
+                    _id: updatedUser._id,
+                    likedArtists: updatedUser.likedArtists,
+                });
+
+                console.log("After change:", user.likedArtists)
+            } catch (err) {
+                res.status(404);
+                throw new Error("Couldn't save error")
+            }
+
+        } else {
+            res.status(404);
+            throw new Error('Artist not found')
+        }
+
+    } else {
+        res.status(404);
+        throw new Error('User not found')
+    }
+    
+})
+
 export {
     authUser,
     registerUser,
     logoutUser,
     getUserProfile,
     updateUserProfile,
+    getUserLikedAlbums,
+    addUserLikedAlbums,
+    removeUserLikedAlbums,
+    getUserLikedArtists,
+    addUserLikedArtists,
+    removeUserLikedArtists
+
 }

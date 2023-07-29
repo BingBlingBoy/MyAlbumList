@@ -41,7 +41,7 @@ const Header = () => {
         }
         // getAccessToken().then(data => setAccessToken(data))
         settingAccessToken();
-    }, [tokenData]);
+    }, [tokenData,accessToken]);
 
     const logoutHandler = async () => {
         try {

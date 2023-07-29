@@ -1,5 +1,5 @@
 import Logout from "./Logout"
-import { useState, useEffect } from "react";
+import { useState, useEffect, SyntheticEvent } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { setCredentials } from "../../slices/authSlice";
@@ -26,7 +26,7 @@ const ProfilePage = () => {
         setEmail(userInfo.email);
     }, [userInfo.setName, userInfo.setEmail])
 
-    const submitHandler = async (event) => {
+    const submitHandler = async (event: SyntheticEvent) => {
         event.preventDefault();
         if (password !== confirmPassword) {
             toast.error('Passwords do not match')

@@ -4,7 +4,8 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useGetLikedAlbumQuery, useGetLikedArtistQuery } from "../slices/userApiSlice"
+import { useSelector } from 'react-redux';
 
 type accessTokenProps = {
     accessToken: string,
@@ -12,24 +13,34 @@ type accessTokenProps = {
 
 const Searchbar = ({accessToken}: accessTokenProps) => {
 
+
+    const { userInfo } = useSelector((state) => state.auth);
+    const { data: likedArtistData } = useGetLikedArtistQuery();
+    const { data: likedAlbumData } =  useGetLikedAlbumQuery();
+
     const [searchInput, setSearchInput] = useState("");
     const [searchField, setSearchField] = useState("artist");
+    const [albumLike, setAlbumLike] = useState([])
+    const [artistLike, setArtistLike] = useState([])
     const aToken = accessToken
+    
     
     const navigate = useNavigate();
 
-    useEffect(() => {
-        console.log(searchInput);
-        console.log(searchField);
-        console.log(aToken)
-         
-    }, [searchInput, searchField, aToken])
-
     const handleSearch = (event: SyntheticEvent) => {
-        console.log(aToken)
         event.preventDefault();
-        if (searchInput) {
-            navigate("/search", { state: {searchInput, searchField, aToken} });
+        if (userInfo) {
+            const albumKeys = Object.keys(likedAlbumData?.likedAlbums)
+            const artistKeys = Object.keys(likedArtistData?.likedArtists)
+            setAlbumLike([...albumKeys])
+            setArtistLike([...artistKeys])
+            if (searchInput) {
+                navigate("/search", { state: {searchInput, searchField, aToken, albumLike, artistLike} });
+            }
+        } else {
+            if (searchInput) {
+                navigate("/searchNoUser", {state: {searchInput, searchField, aToken}})
+            }
         }
     };
 

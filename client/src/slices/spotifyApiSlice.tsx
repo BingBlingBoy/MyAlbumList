@@ -12,7 +12,7 @@ interface Token {
 export const spotifyApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getToken: builder.query<Token, number>({
-            query: () => "/api/spotify/" 
+            query: () => "/api/spotify" 
         })
     })
 })
