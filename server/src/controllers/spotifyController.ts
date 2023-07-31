@@ -36,4 +36,27 @@ const getSpotifyAccessToken = asyncHandler(async (req: Request, res: Response ) 
 
 })
 
-export {getSpotifyAccessToken}
+const getSpotifyNewReleases = asyncHandler(async (req: Request, res: Response ) => {
+
+    const code = req.body.code
+    const spotifyApi = new SpotifyWebApi({
+        clientId: '4290ec3ed9d14798a763fd0d628a98a3',
+        clientSecret: '88863ad17b2c491899237a3e024e434b',
+    })
+
+    spotifyApi
+    .clientCredentialsGrant()
+    .then(function(data) {
+        // Set the access token on the API object so that it's used in all future requests
+        spotifyApi.setAccessToken(data.body['access_token']);
+
+        // Get the most popular tracks by David Bowie in Great Britain
+        return spotifyApi.getNewReleases({ limit : 10, offset: 0, country: 'SE' })      
+    })
+    .then(function(data) {
+        res.json({
+            NewReleasesData: data.body
+        })
+    })
+})
+export {getSpotifyAccessToken, getSpotifyNewReleases}

@@ -1,8 +1,9 @@
 import express from "express";
-import { getSpotifyAccessToken } from "../controllers/spotifyController";
+import { getSpotifyAccessToken, getSpotifyNewReleases } from "../controllers/spotifyController";
 
 const router = express.Router()
 
 router.get('/',getSpotifyAccessToken)
+router.get('/NewReleases', getSpotifyNewReleases)
 
 export default router;

@@ -40,13 +40,7 @@ const SearchNoUser = () => {
 
     const content = (
         <>
-            <h1>THIS IS THE SEARCHBAR</h1>
             <br></br>
-            {error 
-                ? <h1>Couldn't fetch the data.</h1> 
-                
-                : 
-
                 <div className="d-flex justify-content-center px-5 mx-5">
                     <Row xs={1} md={3} className="g-5 mx-5 px-5">
                         {response.map( (data, i) => {
@@ -66,7 +60,7 @@ const SearchNoUser = () => {
                         })} 
                     </Row>
                 </div>
-                }
+
             <ToastContainer 
                 position="bottom-right"
                 autoClose={5000}

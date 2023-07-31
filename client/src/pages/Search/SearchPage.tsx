@@ -59,7 +59,6 @@ const Search = () => {
 
     const content = (
         <>
-            <h1>THIS IS THE SEARCHBAR</h1>
             <br></br>
             {state.searchField === "album"
                 ? 
