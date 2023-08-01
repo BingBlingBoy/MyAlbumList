@@ -82,20 +82,23 @@ const updateUserProfile = asyncHandler(async (req: any, res: Response) => {
     const user = await User.findById(req.user._id)
 
     if (user) {
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
 
-        if (req.body.password) {
-            user.password = req.body.password;
+        if ((await user.matchPassword(req.body.password))) {
+            user.name = req.body.name || user.name;
+            user.email = req.body.email || user.email;
+
+            const updatedUser = await user.save();
+
+            res.status(200).json({
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+            });
+        } else {
+            res.status(401)
+            throw new Error('Password is incorrect')
         }
 
-        const updatedUser = await user.save();
-
-        res.status(200).json({
-            _id: updatedUser._id,
-            name: updatedUser.name,
-            email: updatedUser.email,
-        });
 
     } else {
         res.status(404);

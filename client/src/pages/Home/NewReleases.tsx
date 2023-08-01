@@ -26,7 +26,6 @@ const NewReleases = () => {
                 <div className="d-flex justify-content-center px-5 mx-5">
                     <Row className="mx-5 px-5">
                         {response.map( (data, i) => {
-                            console.log(data)
                             return (
                                 <>
                                 <Card className="g-3">

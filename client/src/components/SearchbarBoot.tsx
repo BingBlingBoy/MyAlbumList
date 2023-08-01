@@ -29,7 +29,7 @@ const Searchbar = ({accessToken}: accessTokenProps) => {
 
     const handleSearch = (event: SyntheticEvent) => {
         event.preventDefault();
-        if (userInfo) {
+        if (userInfo && likedAlbumData) {
             const albumKeys = Object.keys(likedAlbumData?.likedAlbums)
             const artistKeys = Object.keys(likedArtistData?.likedArtists)
             setAlbumLike([...albumKeys])
