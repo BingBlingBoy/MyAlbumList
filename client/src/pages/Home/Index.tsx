@@ -1,10 +1,12 @@
-import Header from "./Header"
+import NewReleases from "./NewReleases"
+import Footer from "../../components/Footer"
 
 const Index = () => {
 
     const content = (
         <>
-            <Header />
+            <NewReleases />
+            <Footer />
         </>
     )
 
