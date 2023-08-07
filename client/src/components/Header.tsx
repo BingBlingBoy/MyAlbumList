@@ -65,20 +65,6 @@ const Header = () => {
                     <Navbar.Collapse id='basic-navbar-nav'>
                         <Searchbar accessToken={accessToken}/>
                         <Nav className='ms-auto d-inline-flex'>
-                            <LinkContainer to='/new-music'>
-                                <Nav.Link>
-                                    <span style={{whiteSpace: 'nowrap'}}>
-                                        New Music
-                                    </span>
-                                </Nav.Link>
-                            </LinkContainer>
-                            <LinkContainer to='/playlists'>
-                                <Nav.Link>
-                                    <span style={{whiteSpace: 'nowrap'}}>
-                                        Playlist
-                                    </span>
-                                </Nav.Link>
-                            </LinkContainer>
                             {userInfo ? (
                                 <>
                                     <NavDropdown title={userInfo.name} id='username'>

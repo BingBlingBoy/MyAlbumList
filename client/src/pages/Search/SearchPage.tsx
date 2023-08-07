@@ -4,7 +4,7 @@ import { getSearchQueryData } from "../../services/SearchQuery"
 import AlbumResults from "./AlbumResults" 
 import 'react-toastify/dist/ReactToastify.css';
 import ArtistResults from "./ArtistResults";
-
+import Footer from "../../components/Footer"
 
 const Search = () => {
 
@@ -76,6 +76,7 @@ const Search = () => {
                     updateArtistLikeState={updateArtistLikeState}
                     />
             }
+            <Footer />
         </>
     )
 

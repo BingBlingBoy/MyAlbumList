@@ -3,6 +3,7 @@ import { useGetNewReleasesQuery } from "../../slices/spotifyApiSlice"
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Card, Row, Col, Image } from "react-bootstrap"
+import Loader from "../../components/Spinner"
 
 const NewReleases = () => {
 
@@ -18,7 +19,7 @@ const NewReleases = () => {
     const content = (
         <>
         {isLoading 
-            ? <h1>Loading Innnit</h1> 
+            ? <Loader /> 
             :
             <>
             <br></br>

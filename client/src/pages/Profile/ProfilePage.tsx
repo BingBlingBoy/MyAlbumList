@@ -3,6 +3,7 @@ import Stats from "./Stats"
 import { Container, Row, Col } from "react-bootstrap" 
 import DisplayUserInfo from "./DisplayUserInfo"
 import DisplayStats from "./DisplayStats"
+import Footer from "../../components/Footer"
 
 const ProfilePage = () => {
 
@@ -25,6 +26,7 @@ const ProfilePage = () => {
                     </Col>
                 </Row>
             </Container>
+            <Footer />
         </>
     );
     
