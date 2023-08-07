@@ -7,6 +7,7 @@ import { useDispatch, useSelector} from 'react-redux'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Form, Button } from 'react-bootstrap'
+import Loader from "../../components/Spinner"
 
 const LoginBox = () => {
     
@@ -60,7 +61,7 @@ const LoginBox = () => {
             </div>
         </Form>
 
-        {isLoading && <h2>Loading innit</h2> } {/*Add spinner */}
+        {isLoading && <Loader /> } 
         <ToastContainer 
             position="bottom-right"
             autoClose={5000}

@@ -67,9 +67,6 @@ const AlbumResults = (state) => {
         } 
     }
 
-    useEffect(() => {
-        console.log(albumLike)
-    }, [albumLike])
     const content = ( 
         <>
         {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Image } from "react-bootstrap"
+import { Card, Image, Form } from "react-bootstrap"
 import { useSelector } from "react-redux"
 
 const UserIntro = () => {
@@ -16,7 +16,6 @@ const UserIntro = () => {
         <Card className="mb-4">
             <Card.Body className="text-center">
                 <Card.Title>{username}</Card.Title>
-                <Image src="#" className="rounded-circle img-fluid"/>
             </Card.Body>
         </Card>
         </>
