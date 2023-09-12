@@ -1,31 +1,24 @@
 import { FaThumbsUp } from "react-icons/fa6"
 import { Card, Row, Col, Button} from "react-bootstrap"
-import { useEffect, useState } from "react"
 import { useAddLikedArtistMutation, useRemovedLikedArtistMutation } from "../../slices/userApiSlice"
 import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 
-const ArtistResults = (state) => {
+const ArtistResults = (state:any) => {
     
-    interface dataType {
-        id: string,
-        name: string,
-        images: string
-    }
-
     const apiResponse = state.response
     const artistLike = state.artistLike
     const setArtistLike = state.setArtistLike
     const updateParentLikeState = state.updateArtistLikeState
 
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state: any) => state.auth);
     
     const [addLikedArtist] = useAddLikedArtistMutation();
     const [removedLikedArtist] = useRemovedLikedArtistMutation();
 
 
-    const handleButtonClick = async (data: dataType) => {
+    const handleButtonClick = async (data: any) => {
         const _id = userInfo._id;
         console.log(_id)
         const artistId = data.id
@@ -49,7 +42,7 @@ const ArtistResults = (state) => {
                     name, 
                     img 
                }).unwrap();
-            } catch (err) {
+            } catch (err: any) {
                 toast.error(err?.data?.message || err.error)
             }
         }
@@ -62,7 +55,7 @@ const ArtistResults = (state) => {
                 _id: userInfo._id,
                 artistId: artistId
             }).unwrap()
-        } catch (err) {
+        } catch (err: any) {
             toast.error(err?.data?.message || err.error)
         } 
     }

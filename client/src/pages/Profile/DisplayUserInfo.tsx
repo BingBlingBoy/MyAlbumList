@@ -1,4 +1,4 @@
-import { Form, Button, Card, Row, Col } from "react-bootstrap"
+import { Form, Button, Card } from "react-bootstrap"
 import { SyntheticEvent, useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,13 +16,13 @@ const DisplayUserInfo = () => {
 
     const dispatch = useDispatch();
 
-    const { userInfo } = useSelector((state) => state.auth);
-    const [updateProfile, { isLoading }] = useUpdateUserMutation();
+    const { userInfo } = useSelector((state:any) => state.auth);
+    const [updateProfile] = useUpdateUserMutation();
     
     useEffect(() => {
         setName(userInfo.name);
         setEmail(userInfo.email);
-    }, [userInfo.setName, userInfo.setEmail])
+    }, [userInfo.setName, userInfo.setEmail, userInfo.name, userInfo.email])
 
     const handleButtonClick = () => {
         setReadyEdit(!readyEdit)
@@ -45,7 +45,7 @@ const DisplayUserInfo = () => {
                 }).unwrap();
                 dispatch(setCredentials({...res}))
                 toast.success('Profile Updated')
-            } catch (err) {
+            } catch (err: any) {
                 toast.error(err?.data?.message || err.error)
             }
          

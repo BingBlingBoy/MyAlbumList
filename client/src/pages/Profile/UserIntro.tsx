@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Card, Image, Form } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 import { useSelector } from "react-redux"
 
 const UserIntro = () => {
 
     const [username, setUsername] = useState("")
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state: any) => state.auth);
 
     useEffect(() => {
         setUsername(userInfo.name)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetNewReleasesQuery } from "../../slices/spotifyApiSlice"
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { Card, Row, Col, Image } from "react-bootstrap"
 import Loader from "../../components/Spinner"
 
@@ -26,7 +26,7 @@ const NewReleases = () => {
                 <h1 className="d-flex justify-content-center mb-4">New Releases</h1>
                 <div className="d-flex justify-content-center px-5 mx-5">
                     <Row className="mx-5 px-5">
-                        {response.map( (data, i) => {
+                        {response.map( (data:any, i) => {
                             return (
                                 <>
                                 <Card className="g-3">
@@ -38,7 +38,7 @@ const NewReleases = () => {
                                             <Card.Body>
                                                 <Card.Title>{data.name}</Card.Title>
                                                     <Card.Text>
-                                                        Artist: {data.artists.map( (artist, j)=> {
+                                                        Artist: {data.artists.map( (artist:any, j: any)=> {
                                                             return (
                                                                 <span key={j}>
                                                                     {artist.name}

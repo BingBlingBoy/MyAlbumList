@@ -18,9 +18,9 @@ const SignIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state:any) => state.auth);
 
-    const [register, { isLoading }] = useRegisterMutation();
+    const [register ] = useRegisterMutation();
 
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const SignIn = () => {
                 const res = await register({ name, email, password }).unwrap();
                 dispatch(setCredentials({...res}))
                 navigate('/')
-            } catch (err) {
+            } catch (err: any) {
                 toast.error(err?.data?.message || err.error)
             }
         }

@@ -21,8 +21,8 @@ import { ToastContainer, toast } from 'react-toastify';
 const Header = () => {
 
 
-    const [accessToken, setAccessToken] = useState("");
-    const { userInfo } = useSelector((state) => state.auth);
+    const [accessToken, setAccessToken] = useState<any>("");
+    const { userInfo } = useSelector((state: any) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Header = () => {
         const settingAccessToken =() => {
             try {
                 setAccessToken(tokenData?.accessToken)
-            } catch (err) {
+            } catch (err: any) {
                 toast.error(err?.data?.message || err.error)
             }
         }
