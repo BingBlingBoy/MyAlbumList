@@ -30,11 +30,11 @@ const Search = () => {
     const { state } = useLocation();
 
     
-    const updateAlbumLikeState = (value) => {
+    const updateAlbumLikeState = (value:any) => {
         setAlbumLike([...value])
     }
 
-    const updateArtistLikeState = (value) => {
+    const updateArtistLikeState = (value:any) => {
         setArtistLike([...value])
     }
 
@@ -48,14 +48,15 @@ const Search = () => {
             setArtistLike(newArtistLikeData)
             getSearchQueryData(state)
                 .then(data => {setResponse(data)})
-                .catch(error => {
-                    setError(error)
+                .catch(err => {
+                    setError(err)
+                    console.log(error)
                 })
         }
         
         settingSearchQuery()
 
-    }, [state])
+    }, [state, error])
 
     const content = (
         <>

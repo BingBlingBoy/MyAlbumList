@@ -2,7 +2,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGetLikedAlbumQuery, useGetLikedArtistQuery } from "../slices/userApiSlice"
 import { useSelector } from 'react-redux';
@@ -14,14 +14,14 @@ type accessTokenProps = {
 const Searchbar = ({accessToken}: accessTokenProps) => {
 
 
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state: any) => state.auth);
     const { data: likedArtistData } = useGetLikedArtistQuery();
     const { data: likedAlbumData } =  useGetLikedAlbumQuery();
 
     const [searchInput, setSearchInput] = useState("");
     const [searchField, setSearchField] = useState("artist");
-    const [albumLike, setAlbumLike] = useState([])
-    const [artistLike, setArtistLike] = useState([])
+    const [albumLike, setAlbumLike] = useState<string[]>([])
+    const [artistLike, setArtistLike] = useState<string[]>([])
     const aToken = accessToken
     
     

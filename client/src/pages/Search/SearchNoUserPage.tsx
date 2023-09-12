@@ -29,14 +29,15 @@ const SearchNoUser = () => {
         const settingSearchQuery = () => {
             getSearchQueryData(state)
                 .then(data => {setResponse(data)})
-                .catch(error => {
-                    setError(error)
+                .catch(err => {
+                    setError(err)
+                    console.log(error)
                 })
         }
 
         settingSearchQuery()
 
-    }, [state])
+    }, [state, error])
 
     const content = (
         <>

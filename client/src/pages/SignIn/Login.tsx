@@ -1,6 +1,5 @@
 import { SyntheticEvent, useState, useEffect } from "react"
-import { LoginUser } from "../../services/userServices"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { setCredentials } from "../../slices/authSlice"
 import { useLoginMutation } from "../../slices/userApiSlice"
 import { useDispatch, useSelector} from 'react-redux'
@@ -19,7 +18,7 @@ const LoginBox = () => {
 
     const [login, { isLoading }] = useLoginMutation();
 
-    const { userInfo } = useSelector((state) => state.auth);
+    const { userInfo } = useSelector((state:any) => state.auth);
 
     useEffect(() => {
         if (userInfo) {
@@ -33,7 +32,7 @@ const LoginBox = () => {
             const res = await login({ email, password }).unwrap();
             dispatch(setCredentials({...res}))
             navigate('/')
-        } catch (err) {
+        } catch (err: any) {
             toast.error(err?.data?.message || err.error)
         }
     }
