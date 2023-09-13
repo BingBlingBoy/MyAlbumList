@@ -11,7 +11,8 @@ export default defineConfig({
       proxy: {
           '/api': {
               target: 'https://myalbumlist-api.onrender.com',
-              changeOrigin: true,  
+              changeOrigin: true,
+              secure: false,
           },
       }
   }
