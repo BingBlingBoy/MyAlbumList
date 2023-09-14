@@ -13,7 +13,9 @@ const port = 3000;
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5173","https://myalbumlist-api.onrender.com"]
+}));
 
 
 // Middleware to parse JSON bodies
