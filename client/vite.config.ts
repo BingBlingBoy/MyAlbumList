@@ -12,7 +12,7 @@ export default defineConfig({
           '/api': {
               target: 'https://myalbumlist-api.onrender.com',
               changeOrigin: true,
-              secure: false,
+              rewrite: (path) => path.replace(/^\/api/, ''),
           },
       }
   }
