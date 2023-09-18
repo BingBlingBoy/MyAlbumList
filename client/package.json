@@ -45,5 +45,5 @@
     "typescript-styled-plugin": "^0.18.3",
     "vite": "^4.3.9"
   },
-  "proxy": "http://localhost:3000"
+  "proxy": "https://myalbumlist-api.onrender.com"
 }
