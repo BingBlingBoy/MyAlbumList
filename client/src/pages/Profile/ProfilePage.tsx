@@ -10,7 +10,6 @@ const ProfilePage = () => {
     const content = (
         <>
             <Container className="py-4">
-                <h1 className="mb-3">This is the profile page</h1>
                 <Row className="d-flex"> 
                     <Col md={4} className="flex-fill">
                         <UserIntro />

@@ -14,7 +14,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: ["http://localhost:5173","https://myalbumlist-api.onrender.com"]
+    origin: [
+        "http://localhost:5173",
+        "https://myalbumlist-api.onrender.com",
+        "https://myalbumlist.onrender.com"
+    ]
 }));
 
 
