@@ -15,7 +15,7 @@ const Searchbar = ({accessToken}: accessTokenProps) => {
 
 
     const { userInfo } = useSelector((state: any) => state.auth);
-    const { data: likedArtistData } = useGetLikedArtistQuery();
+    const { data: likedArtistData, error } = useGetLikedArtistQuery();
     const { data: likedAlbumData } =  useGetLikedAlbumQuery();
 
     const [searchInput, setSearchInput] = useState("");
@@ -29,6 +29,8 @@ const Searchbar = ({accessToken}: accessTokenProps) => {
 
     const handleSearch = (event: SyntheticEvent) => {
         event.preventDefault();
+        console.log(likedAlbumData);
+        console.log(error);
         if (userInfo && likedAlbumData) {
             const albumKeys = Object.keys(likedAlbumData?.likedAlbums)
             const artistKeys = Object.keys(likedArtistData?.likedArtists)

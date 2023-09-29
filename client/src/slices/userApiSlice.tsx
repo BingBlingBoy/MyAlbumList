@@ -19,7 +19,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data
             }) 
         }),
-        logout: builder.mutation<any, void>({
+        logout: builder.mutation({
             query: () => ({
                 url: `${USERS_URL}/logout`,
                 method: 'POST'
@@ -46,7 +46,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data
             }) 
         }),
-        getLikedAlbum: builder.query<any, void>({
+        getLikedAlbum: builder.query({
             query: () => `${USERS_URL}/album` 
         }),
 
@@ -64,7 +64,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 body: data
             }) 
         }),
-        getLikedArtist: builder.query<any, void>({
+        getLikedArtist: builder.query({
             query: () => `${USERS_URL}/artist` 
         })
     })

@@ -6,7 +6,6 @@ type stateProps = {
 
 export const getSearchQueryData = async (state: stateProps) => {
     const {searchInput, searchField, aToken} = state;
-    console.log(aToken)
     const field = searchField + "s";
     
     const searchParameters = {
@@ -22,10 +21,8 @@ export const getSearchQueryData = async (state: stateProps) => {
             throw new Error("Couldn't fetch data")
         }
         const data = await response.json()
-        console.log(data)
         return data[field].items
     } catch (error) {
-        console.log(error)
         return Promise.reject(error)
     }
 }
