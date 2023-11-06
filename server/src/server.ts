@@ -17,7 +17,8 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "https://myalbumlist-api.onrender.com",
-        "https://myalbumlist.onrender.com"
+        "https://myalbumlist.onrender.com",
+        "https://6548e0277c28b720203bc33d--aesthetic-rugelach-7f7b33.netlify.app/"
     ]
 }));
 
