@@ -19,7 +19,8 @@ app.use(cors({
         "https://myalbumlist-api.onrender.com",
         "https://myalbumlist.onrender.com",
         "https://6548e0277c28b720203bc33d--aesthetic-rugelach-7f7b33.netlify.app/",
-        "https://aesthetic-rugelach-7f7b33.netlify.app"
+        "https://aesthetic-rugelach-7f7b33.netlify.app",
+        "https://main--aesthetic-rugelach-7f7b33.netlify.app"
     ]
 }));
 
