@@ -32,7 +32,7 @@ const NewReleases = () => {
                                 <Card className="g-3">
                                     <Row>
                                         <Col className="px-0" md={3} key={i}>
-                                            <Image fluid src={data.images.length !== 0 ? data.images[1].url : ""} />
+                                            <Image fluid src={data.images.length !== 0 ? data.images[2].url : ""} />
                                         </Col>
                                         <Col md={8}>
                                             <Card.Body>
